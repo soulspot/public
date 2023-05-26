@@ -1,29 +1,78 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Email Confirmation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Email Confirmation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-<body style="background-color: #e9ecef; width: 100%; height:100vh; display: flex; align-items: center;justify-content: center;">
-    <table align="center" cellpadding="0" cellspacing="0" width="600" height="400" style="border-spacing: 0; margin-top: 30px;padding: 30px; border-radius: 10px;box-shadow: -1px 1px 15px 0px rgba(0,0,0,0.75); background: linear-gradient(to right, #121FCF 0%, #d72623 100%);">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body
+    style="background-color: #e9ecef; width: 100%; height:100vh; display: flex; align-items: center;justify-content: center;">
+    <table align="center" cellpadding="0" cellspacing="0" width="600" height="400"
+        style="border-spacing: 0; margin-top: 30px;padding: 30px; border-radius: 10px;box-shadow: -1px 1px 15px 0px rgba(0,0,0,0.75); background: linear-gradient(to right, #121FCF 0%, #d72623 100%);">
         <!-- logo -->
         <!-- <tr><th><img src="https://codewithsoul.co.in/home/static/media/logo.043afe9f3f87d78229f2.png" width="100" height="100" style="border-radius: 50%;" alt="logo"></th></tr> -->
-        <tr><th><img src="https://cdni.iconscout.com/illustration/premium/thumb/verify-email-2748674-2289734.png" width="100" height="100" style="border-radius: 50%;" alt="logo"></th></tr>
+        <tr>
+            <th><img src="https://cdni.iconscout.com/illustration/premium/thumb/verify-email-2748674-2289734.png"
+                    width="100" height="100" style="border-radius: 50%;" alt="logo"></th>
+        </tr>
         <!-- heading -->
-        <tr><td border="0" align="center" style="font-family: sans-serif; font-size: 21px; color: rgb(208, 165, 165);"><h2>Confirm Your Email Address</h2></td></tr>
+        <tr>
+            <td border="0" align="center" style="font-family: sans-serif; font-size: 21px; color: rgb(208, 165, 165);">
+                <h2 style="margin: 20px;">Confirm Your Email Address</h2>
+            </td>
+        </tr>
         <!-- name -->
-        <tr><td style="font-size: 20px;color: white; font-weight: 600; font-family: sans-serif; margin: 0; padding: 0; opacity: 0.9;"><p>Hi, %name%, <br> <p style="font-size: 16px; opacity: 0.7; color: white; font-family: sans-serif;">We have received an email verification request from your CWS (CodeWithSoul) account. In order to proceed with the verification process and ensure the security of your account, we kindly request you to click on the "Verify" button provided below. By doing so, you will be able to confirm your identity and complete the account verification.</p></p></td></tr>
+        <tr>
+            <td
+                style="font-size: 20px;color: white; font-weight: 600; font-family: sans-serif; margin: 0; padding: 0; opacity: 0.9;">
+                <p style="margin-bottom: 20px;">Hi, <strong id="name">%name%</strong>,</p>
+                <p style="font-size: 16px; opacity: 0.8; color: white; font-family: sans-serif;">We have received an
+                    email verification request from your CWS (CodeWithSoul) account. In order to proceed with the
+                    verification process and ensure the security of your account, we kindly request you to click on the
+                    "Verify" button provided below. By doing so, you will be able to confirm your identity and complete
+                    the account verification.</p>
+
+            </td>
+        </tr>
 
 
 
         <!-- button -->
-        <tr><td align="center" style="border-radius: 6px;"><a href="https://codewithsoul.co.in/home/verify?token=%token%" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 18px;font-weight: 600;background-color:#d85cf9; color: #ffffff; text-decoration: none; border-radius: 10px;">Verify email</a></td></tr>
+        <tr>
+            <td align="center" style="border-radius: 6px;" id="token"></td>
+        </tr>
 
     </table>
 
 </body>
+<script>
+    const searchString = window.location.search;
+    const searchParamsString = searchString.substring(1);
+    const searchParamsArray = searchParamsString.split('&');
+    const searchParams = {};
+    searchParamsArray.forEach(param => {
+        const [key, value] = param.split('=');
+        searchParams[key] = decodeURIComponent(value);
+    });
+    let name1 = document.getElementById('name');
+    let token = document.getElementById('token');
+    name1.innerText = searchParams['name'];
+    token.innerHTML = `<a 
+                    href="https://codewithsoul.co.in/home/verify?token=${searchParams['token']}" target="_blank"
+                    style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 18px;font-weight: 600;background-color:#d85cf9; color: #ffffff; text-decoration: none; border-radius: 10px; margin-top: 30px;">Verify
+                    email</a>`;
+
+</script>
+
 </html>
